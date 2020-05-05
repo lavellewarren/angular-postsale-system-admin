@@ -1,0 +1,236 @@
+<section class="col">
+    <div class="row header-area none-border">
+        <div class="return-btn">
+            <div class="chevron-icon pointer" routerLink="/app/receiveItems/identifyPackage/tracknum">
+                <fa name="angle-left"></fa>
+            </div>        
+            <p class="order-title">Evaluate items (2)</p>
+            <div class="editNum">
+                <span class="upper-text border-bottom grey-text">EDIT</span>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="products row no-margin">
+            <div class="" *ngFor="let product of products; let indexOfProd = index;">
+                <div class="product-item back-white blue-border" *ngIf="product.id == select_item" (click)="selectItem(product.id)">
+                    <div class="item-info">
+                        <div class="item-image col-4 no-padding">
+                            <img src="{{product.photo}}" width="60px"/>
+                        </div>
+                        <div class="item-title col-7 no-padding">
+                            <p>{{product.title}}</p>
+                        </div>
+                        <div class="complete-check" *ngIf="complete_item[indexOfProd].flag">
+                            <i class="fa fa-check-circle blue-text"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-item back-white" *ngIf="product.id != select_item" (click)="selectItem(product.id)">
+                    <div class="item-info">
+                        <div class="item-image col-4 no-padding">
+                            <img src="{{product.photo}}" width="60px"/>
+                        </div>
+                        <div class="item-title col-7 no-padding">
+                            <p>{{product.title}}</p>
+                        </div>
+                        <div class="complete-check" *ngIf="complete_item[indexOfProd].flag">
+                            <i class="fa fa-check-circle blue-text"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item back-white">
+                <div class="item-info">
+                    <div class="item-image col-4">
+                        <div class="back-grey rect-area">
+                            <i class="fa fa-question grey-text"></i>
+                        </div>
+                    </div>
+                    <div class="item-title col-8">
+                        <p>Book-"Thinking fast & slow" by Danial Kahneman</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-settings back-dark-grey">
+            <div class="buttons">
+                <div class="back-btn pointer" *ngIf="step != 0" (click)="backStep()">
+                    <i class="fa fa-chevron-left grey-text"></i>
+                    <span class="grey-text"> Back</span>
+                </div>
+                <div class="back-btn none-border pointer" *ngIf="step == 0">
+                </div>
+                <div *ngIf="step != 3">
+                    <div class="blue-btn pointer" *ngIf="flag_active" (click)="nextStep()">
+                        <span>Next</span>
+                    </div>
+                    <div class="blue-btn inactive pointer" *ngIf="!flag_active">
+                        <span>Next</span>
+                    </div>
+                </div>
+            </div>
+            <div class="item-content">
+                <div class="product-information">
+                    <div class="step-1 step" *ngIf="step == 0">
+                        <div class="title-text">
+                            <p>Was the unit damaged by customer?</p>
+                        </div>
+                        <div class="answer-btns">
+                            <div class="no-btn grey-btn pointer" *ngIf="!select_no" (click)="activeNo()">
+                                <span>No</span>
+                            </div>
+                            <div class="no-btn grey-btn active pointer" *ngIf="select_no">
+                                <span>No</span>
+                            </div>
+                            <div class="yes-btn grey-btn pointer" *ngIf="!select_yes" (click)="activeYes()">
+                                <span>Yes</span>
+                            </div>
+                            <div class="yes-btn grey-btn active pointer" *ngIf="select_yes">
+                                <span>Yes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-2 step" *ngIf="step == 1">
+                        <div class="title-text">
+                            <p>Please upload photo of damage</p>
+                        </div>
+                        <div class="upload-image">
+                            <div class="uploadfilecontainer info-input back-grey" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+                                <div class="file-input info-title">
+                                    <img src="/assets/images/12422876571558965391-512.png" width="28px">
+                                    <span class="grey-text"> Drop file here or click...</span>
+                                </div>
+                                <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-3 step" *ngIf="step == 2">
+                        <div class="title-text">
+                            <p>Is iCloud (Find My iPhone) ON?</p>
+                        </div>
+                        <div class="imei-field">
+                            <div class="imei-area">
+                                <div class="input-border">
+                                    <input type="number" class="imei-input" placeholder="Enter IMEI number" (change)="setIMEI()" [(ngModel)]="imei_number"/>
+                                    <i class="fa fa-close" (click)="cancelIMEI()" *ngIf="imei_number != 0 || imei_number != ''"></i>
+                                </div>
+                                <div class="imei-verification">
+                                    <span>IMEI not found</span>
+                                </div>
+                            </div>
+                            <div class="checked-items" *ngIf="imei_number != 0 || imei_number != ''">
+                                <i class="fa fa-check grey-text"></i>
+                                <span class="grey-text check-text">Inventory match</span>
+                                <i class="fa fa-check grey-text"></i>
+                                <span class="grey-text check-text">iCloud OFF</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-4 step" *ngIf="step == 3">
+                        <div class="title-text">
+                            <p>Review & Confirm</p>
+                        </div>
+                        <div class="confirm-field">
+                            <div class="steps-value row">
+                                <div class="col-5">
+                                    <span>Was the unit damaged by customer?</span>
+                                </div>
+                                <div class="col-7">
+                                    <span>No</span>
+                                </div>
+                            </div>
+                            <div class="steps-value row">
+                                <div class="col-5">
+                                    <span>Does the unit power on?</span>
+                                </div>
+                                <div class="col-7">
+                                    <span>Yes</span>
+                                </div>
+                            </div>
+                            <div class="steps-value row">
+                                <div class="col-5">
+                                    <span>Is iCloud (Find My iPhone) ON?</span>
+                                </div>
+                                <div class="col-7 imei-info">
+                                    <span>580239220394882</span>
+                                    <div class="checked-value">
+                                        <i class="fa fa-check grey-text"></i>
+                                        <span class="grey-text check-text">Inventory match</span>
+                                        <i class="fa fa-check grey-text"></i>
+                                        <span class="grey-text check-text">iCloud OFF</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="steps-value row">
+                                <div class="col-5">
+                                    <span>Additional comments</span>
+                                </div>
+                                <div class="col-7">
+                                    <textarea></textarea>
+                                </div>
+                            </div>
+                            <div class="steps-value row no-margin steps-btns">
+                                <div class="print-btn blue-btn btns pointer" (click)="openPrintModal()">
+                                    <span>Print label</span>
+                                </div>
+                                <div class="blue-btn inactive btns pointer" *ngIf="!flag_confirm">
+                                    <span>Confirm & Submit</span>
+                                </div>
+                                <div class="blue-btn btns pointer" *ngIf="flag_confirm" (click)="confirm()">
+                                    <span>Confirm & Submit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <modal #printModal class="print-modal grey-modal package-modal">
+        <modal-header>
+            <p>Print label</p>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="closePrintModal()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </modal-header>
+        <modal-content>
+            <div class="number-area">
+                <div class="back-grey">
+                    <div class="tab-first-body">
+                        <div class="filter-area row no-margin">
+                            <div class="title-printers">
+                                <span>Select printer</span>
+                            </div>
+                            <div class="category-selector back-white">
+                                <select>
+                                    <!-- <option class="grey-text">Category</option>
+                                    <option *ngFor="let category of categories">{{ category }}</option> -->
+                                </select>
+                                <i class="fa fa-chevron-down grey-text"></i>
+                            </div>
+                        </div>
+                        <div class="items-table-area">
+                            <div class="table-body row no-margin">
+                                <div class="row search-item print back-white no-margin">
+                                    <div class="col-2 row no-margin">
+                                        <img src="{{products[index].photo}}" width="50px"/>                                          
+                                    </div>
+                                    <div class="col-6 start-text">
+                                        <span>{{products[index].title}}</span>
+                                    </div>
+                                    <div class="col-4 row no-margin">
+                                        <div class="blue-btn print-label">
+                                            <span>Print label</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </modal-content>
+        <modal-footer></modal-footer>
+    </modal>
+</section>

@@ -1,0 +1,26 @@
+<header>
+    <div class="sub-list">
+        <div class="active" routerLink="/app/receiveItems/identifyPackage/tracknum" routerLinkActive="active">
+            <span routerLink="/app/receiveItems/identifyPackage">
+                Identify package
+            </span>
+        </div>
+        <div routerLink="/app/receiveItems/pendingEvaluation" routerLinkActive="active">
+            <span routerLink="/app/receiveItems/pendingEvaluation">
+                Pending evaluation
+            </span>
+        </div>
+    </div>
+    <div class="account">
+        <div class="common-btn pointer" routerLink="/app/receiveItems/identifyPackage/tracknum">
+            <span href="javascript:;">+ Receive package</span>
+        </div>
+        <img src="assets/images/account.jpg">
+        <div class="account-info">
+            <img src="assets/images/arrow-down.png">
+            <!-- <h5>{{util.user.name}}</h5> -->
+            <h5>Urazov</h5>
+        </div>
+    </div>
+</header>
+<router-outlet></router-outlet>

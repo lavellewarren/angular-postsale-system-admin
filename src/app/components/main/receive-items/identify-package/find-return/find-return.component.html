@@ -1,0 +1,385 @@
+<section class="col">
+    <div class="row header-area">
+        <div class="return-btn">
+            <div class="chevron-icon pointer" routerLink="/app/receiveItems/identifyPackage/tracknum">
+                <fa name="angle-left"></fa>
+            </div>        
+            <p class="order-title">Return #9837115</p>
+        </div>
+        <div class="save-btn" *ngIf="flag_full" (click)="openPrintModal()">
+            <div class="btn-item">
+                <span>Save</span>
+            </div>
+        </div>
+    </div>
+    <div class="row content-area">
+        <div class="col-8">
+            <div class="row shipping-info">
+                <div class="info-area">
+                    <div class="row item no-margin">
+                        <div class="col-4 item-name no-padding">
+                            <span class="grey-text">Order number</span>
+                        </div>
+                        <div class="col-7 item-info">
+                            <span>#2398733</span>
+                        </div>
+                    </div>
+                    <div class="row item no-margin">
+                        <div class="col-4 item-name no-padding">
+                            <span class="grey-text">Sales Channel</span>
+                        </div>
+                        <div class="col-7 item-info">
+                            <span>eBay - EMB Main Shop</span>
+                        </div>
+                    </div>
+                    <div class="row item no-margin">
+                        <div class="col-4 item-name no-padding">
+                            <span class="grey-text">Order Date</span>
+                        </div>
+                        <div class="col-7 item-info">
+                            <span>12/2/2019</span>
+                        </div>
+                    </div>
+                    <div class="row item no-margin">
+                        <div class="col-4 item-name no-padding">
+                            <span class="grey-text">Customer name</span>
+                        </div>
+                        <div class="col-7 item-info">
+                            <span>Shloime Pfeiffer</span>
+                        </div>
+                    </div>
+                    <div class="row item no-margin">
+                        <div class="col-4 item-name no-padding">
+                            <span class="grey-text">Shipping address</span>
+                        </div>
+                        <div class="col-7 item-info">
+                            <span>24 Smith Hill Rd. Airmont NY 10952</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="num-area">
+                    <div class="row no-margin">
+                        <div class="col-4 card">
+                            <div class="item-block">
+                                <p class="num grey-text">4</p>
+                                <p class="upper-text grey-text">total<br />orders</p>
+                            </div>
+                        </div>
+                        <div class="col-4 card">
+                            <div class="item-block">
+                                <p class="num grey-text">9</p>
+                                <p class="upper-text grey-text">items<br />ordered</p>
+                            </div>
+                        </div>
+                        <div class="col-4 card">
+                            <div class="item-block">
+                                <p class="num grey-text">2</p>
+                                <p class="upper-text grey-text">items<br />returned</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="products" *ngFor="let product of products">
+                <div class="row back-white border-shodow product-item" id="{{product.id}}" *ngIf="product.qty > 0">
+                    <div class="product-image col-2">
+                        <img src="{{product.photo}}" />
+                    </div>
+                    <div class="product-info col-5">
+                        <p class="product-title product-blue-text">{{ product.title }}</p>
+                        <p class="product-infos grey-text">SKU {{ product.sku }}</p>
+                        <p class="product-infos grey-text">Condition {{ product.condition }}</p>
+                        <p class="product-infos grey-text">Category {{ product.category }}</p>
+                    </div>
+                    <div class="product-qty-price col-3">
+                        <div class="row">
+                            <div class="product-qty">
+                                <p class="product-key-item grey-text">Qty</p>
+                                <p class="product-qty-info product-blue-text">{{ product.qty }}</p>
+                            </div>
+                            <div>
+                                <p class="product-key-item grey-text">Unit price</p>
+                                <p class="product-qty-info product-blue-text">{{ product.price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-add-btn col-2">
+                        <div class="blue-btn pointer" (click)="onAddItem(product.id)">
+                            <span>Add</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons row">
+                <div routerLink="/app/receiveItems/identifyPackage/findrelated" class="related-btn btn-item pointer">
+                    <p class="btn-title">Related items</p>
+                </div>
+                <div (click)="openAddItemModal()" class="unidentified-btn btn-item">
+                    <p class="btn-title">+ Unidentified item</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 back-grey no-padding items-board">
+            <div class="board">
+                <div class="num-returned-items">
+                    <span>{{ numReturnedItems }} Items </span>
+                    <div class="editNum" (click)="openReturnedModal()">
+                        <span class="upper-text border-bottom grey-text">EDIT</span>
+                    </div>
+                </div>
+                <div class="returned-items" *ngFor="let item of addedItems;">
+                    <div class="added-item back-white">
+                        <div class="remove-btn pointer" *ngIf="!isObjectEmpty(item)" (click)="onDeleteItem(item.id)">
+                            <div><span class="grey-text">X</span></div>
+                        </div>
+                        <div class="item-info" *ngIf="!isObjectEmpty(item)">
+                            <div class="item-image col-4">
+                                <img src="{{item.photo}}" width="60px"/>
+                            </div>
+                            <div class="item-title col-8">
+                                <p>{{item.title}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="evaluate-btn-area">
+                    <div class="evaluate-btn blue-disabled-btn" *ngIf="!flag_full">
+                        <span>Evaluate items</span>
+                    </div>
+                    <div class="evaluate-btn blue-btn pointer" *ngIf="flag_full" routerLink="/app/receiveItems/identifyPackage/evaluate">
+                        <span>Evaluate items</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <modal #returnedModal class="returned-modal package-modal">
+        <modal-header>
+            <p>Please enter amount of returned items</p>
+        </modal-header>
+        <modal-content>
+            <div class="number-area">
+                <div class="row">
+                    <div class="decrease-btn" (click)="onDecreaseNumber()">
+                        <fa name="minus"></fa>
+                    </div>
+                    <div class="number">
+                        <p>{{ numReturnedItems }}</p>
+                    </div>
+                    <div class="increase-btn" (click)="onIncreaseNumber()">
+                        <fa name="plus"></fa>
+                    </div>
+                </div>
+            </div>
+        </modal-content>
+        <modal-footer>
+            <div class="num-submit">
+                <div class="blue-btn pointer" (click)="onSetNumOfItems()">
+                    <span>Continue <fa name="angle-right" style="color: white; margin-left: 10px;"></fa></span>
+                </div>
+            </div>
+        </modal-footer>
+    </modal>
+    
+    <modal #addItemModal class="addItem-modal package-modal">
+        <modal-header>
+            <p>Add unidentified item</p>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="closeAddItemModal()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </modal-header>
+        <modal-content>
+            <div class="number-area">
+                <div class="tab-title row no-margin back-white">
+                    <div class="tab-first pointer" (click)="clickSearch()" *ngIf="!flag_search">
+                        <p>Search Item</p>
+                    </div>
+                    <div class="tab-first pointer active" (click)="clickSearch()" *ngIf="flag_search">
+                        <p>Search Item</p>
+                    </div>
+                    <div class="tab-second pointer" (click)="clickUnrecognized()" *ngIf="flag_search">
+                        <p>Unrecognized Item</p>
+                    </div>
+                    <div class="tab-second pointer active" (click)="clickUnrecognized()" *ngIf="!flag_search">
+                        <p>Unrecognized Item</p>
+                    </div>
+                </div>
+                <div class="tab-body back-grey">
+                    <div class="tab-first-body" *ngIf="flag_search">
+                        <div class="filter-area row no-margin">
+                            <div class="search-key back-white">
+                                <input type="text" class="search-input" (change)="onSearchItems()"/>
+                                <i class="fa fa-search"></i>
+                            </div>
+                            <div class="category-selector back-white">
+                                <select>
+                                    <option class="grey-text">Category</option>
+                                    <option *ngFor="let category of categories">{{ category }}</option>
+                                </select>
+                                <i class="fa fa-chevron-down grey-text"></i>
+                            </div>
+                            <div class="condition-selector back-white">
+                                <select>
+                                    <option class="grey-text" value="-1">Condition</option>
+                                    <option class="black-text" *ngFor="let condition of conditions; let indexOfelement=index;" value="{{indexOfelement}}">{{ condition }}</option>
+                                </select>
+                                <i class="fa fa-chevron-down grey-text"></i>
+                            </div>
+                        </div>
+                        <div class="items-table-area" *ngIf="searchedItems.length > 0">
+                            <div class="table-header">
+                                <div class="row no-margin">
+                                    <div class="col-3 row no-margin">
+                                        <div class="col-5">     
+                                            <span style="width: 100%;"></span>                                       
+                                        </div>
+                                        <div class="col-7 start-text">
+                                            <span class="upper-text">product id</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 start-text">
+                                        <span class="upper-text">name</span>
+                                    </div>
+                                    <div class="col-5 row no-margin">
+                                        <div class="col-4 start-text">
+                                            <span class="upper-text">category</span>
+                                        </div>
+                                        <div class="col-4 start-text">
+                                            <span class="upper-text">condition</span>
+                                        </div>
+                                        <div class="col-4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-body row no-margin">
+                                <div class="row search-item back-white no-margin" *ngFor="let item of searchedItems;">
+                                    <div class="col-3 row no-margin">
+                                        <div class="col-5">  
+                                            <img src="assets/images/Image 5.png" />                                          
+                                        </div>
+                                        <div class="col-7 start-text" style="display: flex; align-items: center;">
+                                            <span>{{item.product_id}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-4 start-text">
+                                        <span>{{item.name}}</span>
+                                    </div>
+                                    <div class="col-5 row no-margin">
+                                        <div class="col-4 start-text">
+                                            <span>{{item.category}}</span>
+                                        </div>
+                                        <div class="col-5 start-text">
+                                            <span>{{item.condition}}</span>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="blue-btn">
+                                                <span>Add</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-second-body" *ngIf="!flag_search">
+                        <div class="item-infos">
+                            <div class="item-description row">
+                                <div class="col-4">
+                                    <span>Item description</span>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="back-white-input info-input" />
+                                </div>
+                            </div>
+                            <div class="item-brand row">
+                                <div class="col-4">
+                                    <div class="category-selector back-dark-grey">
+                                        <select>
+                                            <option class="grey-text">Brand</option>
+                                            <option *ngFor="let brand of brands">{{ brand }}</option>
+                                        </select>
+                                        <i class="fa fa-chevron-down"></i>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="back-white-input info-input" />
+                                </div>
+                            </div>
+                            <div class="item-brand row">
+                                <div class="col-4">
+                                    <div class="category-selector back-dark-grey">
+                                        <select>
+                                            <option class="grey-text">Category</option>
+                                            <option *ngFor="let category of categories">{{ category }}</option>
+                                        </select>
+                                        <i class="fa fa-chevron-down"></i>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="back-white-input info-input" />
+                                </div>
+                            </div>
+                            <div class="add-field">
+                                <a href="javascript:;">ADD FIELD</a>
+                            </div>
+                            <div class="add-btn">
+                                <div class="blue-btn">
+                                    <span>Add</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </modal-content>
+        <modal-footer></modal-footer>
+    </modal>
+
+    <modal #printModal class="print-modal package-modal">
+        <modal-header>
+            <p>Print labels</p>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="closePrintModal()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </modal-header>
+        <modal-content>
+            <div class="number-area">
+                <div class="back-grey">
+                    <div class="tab-first-body">
+                        <div class="filter-area row no-margin">
+                            <div class="title-printers">
+                                <span>Select printer</span>
+                            </div>
+                            <div class="category-selector back-white">
+                                <select>
+                                    <!-- <option class="grey-text">Category</option>
+                                    <option *ngFor="let category of categories">{{ category }}</option> -->
+                                </select>
+                                <i class="fa fa-chevron-down grey-text"></i>
+                            </div>
+                        </div>
+                        <div class="items-table-area">
+                            <div class="table-body row no-margin" *ngIf="flag_full">
+                                <div class="row search-item print back-white no-margin" *ngFor="let item of addedItems;">
+                                    <div class="col-2 row no-margin">
+                                        <img src="{{item.photo}}" width="50px"/>                                          
+                                    </div>
+                                    <div class="col-6 start-text">
+                                        <span>{{item.title}}</span>
+                                    </div>
+                                    <div class="col-4 row no-margin">
+                                        <div class="blue-btn print-label">
+                                            <span>Print label</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </modal-content>
+        <modal-footer></modal-footer>
+    </modal>
+</section>
+

@@ -1,0 +1,20 @@
+.page {
+    background: var(--pale-grey);
+    flex-direction: row;
+    align-items: center;
+}
+
+.forgot-pwd {
+    right: unset;
+}
+
+.page-small_header {
+    text-align: center;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    margin-top: 10px;
+}
+
+.login-area {
+    text-align: center;
+}

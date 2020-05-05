@@ -1,0 +1,36 @@
+<div class="main-container d-flex">
+    <div class="sidebar">
+        <div class="logo">          
+        </div>
+        <div class="menu-list">
+            <div class="menu-item" routerLink="/app/dashboard" routerLinkActive="active">
+                <div class="item">
+                    <h6>Dashbaord</h6>
+                </div>
+            </div>
+            <div class="menu-item" routerLink="/app/orders" routerLinkActive="active">
+                <div class="item">
+                    <h6>Orders</h6>
+                </div>
+            </div>
+            <div class="menu-item" routerLink="/app/receiveItems" routerLinkActive="active">
+                <div class="item">
+                    <h6>Receive Items</h6>
+                </div>
+            </div>
+            <div class="menu-item" routerLink="/app/refunds" routerLinkActive="active">
+                <div class="item">
+                    <h6>Refunds</h6>
+                </div>
+            </div>
+            <div class="menu-item" routerLink="/app/relocation" routerLinkActive="active">
+                <div class="item">
+                    <h6>Reloaction</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body">        
+        <router-outlet></router-outlet>
+    </div>
+</div>

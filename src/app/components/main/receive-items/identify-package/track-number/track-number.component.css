@@ -1,0 +1,56 @@
+.track-section {
+    width: 70%;
+}
+
+.track-header {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.track-title {
+    font-size: 25px;
+}
+
+.track-other {
+    align-items: center;
+    display: flex;
+}
+
+.track-a {
+    font-size: 14px;
+    margin-right: 10px;
+    color: #A1A3AC
+}
+
+.track-other fa {
+    font-size: 14px;
+    color: #A1A3AC
+}
+
+.track-input input {
+    padding: 15px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.track-input ::placeholder {
+    color: #A1A3AC
+}
+
+.grey-text {
+    color: #A1A3AC;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

@@ -1,0 +1,14 @@
+<section class="col track-section">
+    <div class="row track-header">
+        <div>
+            <h2 class="track-title">Scan tracking number</h2>
+        </div>
+        <div class="track-other pointer" routerLink="/app/receiveItems/identifyPackage/ordernum">
+            <span class="track-a">Continue without Tracking number  </span>
+            <fa name="angle-right"></fa>
+        </div>
+    </div>
+    <div class="row track-input">
+        <input placeholder="Enter tracking number" (change)="onEnterTrackingNumber()" type="number"/>
+    </div>
+</section>

@@ -1,0 +1,57 @@
+.sub-list {
+    height: 100%;
+    display: flex;
+}
+
+.sub-list div {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style: none;
+    display: inline-flex;
+    padding: 0px;
+    height: 100%;
+    padding: 0px 30px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sub-list div.active {
+    padding: 0px 30px;
+    display: flex;
+    align-items: center;
+    /* border-bottom: 2px solid var(--bright-blue); */
+}
+
+.sub-list div span {
+    color: var(--grey);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.sub-list div.active span {
+    color: var(--bright-blue);
+    text-decoration: none;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--bright-blue);
+}
+
+.common-btn {
+    padding: 8px 22px;
+    background-color: var(--bright-blue);
+    border-radius: 7px;
+    cursor: pointer;
+    margin-right: 40px;
+}
+
+.common-btn span {
+    color: var(--white);
+}

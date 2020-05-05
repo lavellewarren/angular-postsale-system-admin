@@ -1,0 +1,76 @@
+<section class="col" style="width: 50%; min-width: 500px;">
+    <div class="row header-area">
+        <div class="return-btn">
+            <div class="chevron-icon pointer" routerLink="/app/receiveItems/identifyPackage/tracknum">
+                <fa name="angle-left"></fa>
+            </div>        
+            <p class="order-title">Add Unidentified package</p>
+        </div>
+        <div class="description">
+            <span class="grey-text">
+                Please Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vestibulum nisi tortor, blandit lobortis lectus maximus vel. In tristique mi est, quis vehicula lorem tristique id.
+            </span>
+        </div>
+    </div>
+    <div class="content row">
+        <div class="row info">
+            <div class="col-4 info-title">
+                <span>Tracking number</span>
+            </div>
+            <div class="col-8">
+                <input type="text" class="info-input blue-text back-grey" />
+            </div>
+        </div>
+        <div class="row info">
+            <div class="col-4 info-title">
+                <span>Name on package</span>
+            </div>
+            <div class="col-8">
+                <input type="text" class="info-input blue-text back-grey" />
+            </div>
+        </div>
+        <div class="row info">
+            <div class="col-4 info-title">
+                <span>Ship from address</span>
+            </div>
+            <div class="col-8">
+                <input type="text" class="info-input blue-text back-grey" />
+            </div>
+        </div>
+        <div class="row info">
+            <div class="col-4 upload-title">
+                <span>Upload photos</span>
+            </div>
+            <div class="col-8">
+                <div class="row preview no-margin" *ngIf="images != null">
+                    <div class="preview-item" *ngFor="let image of images; let indexOfImage = index;">
+                        <div class="">
+                            <div class="row close-btn">
+                                <button type="button" class="close pull-right image-item-close" aria-label="Close" (click)="deleteAttachment(indexOfImage)">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="image-area">
+                                <img src="{{image}}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-input">
+                    <div class="uploadfilecontainer info-input back-grey" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+                        <div class="file-input info-title">
+                            <img src="/assets/images/12422876571558965391-512.png" width="28px">
+                            <span class="grey-text"> Drop file here or click...</span>
+                        </div>
+                        <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row info continue-btn">
+            <div class="blue-btn pointer">
+                <span>Continue</span>
+            </div>
+        </div>
+    </div>
+</section>

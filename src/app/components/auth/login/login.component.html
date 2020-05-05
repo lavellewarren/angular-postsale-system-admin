@@ -1,0 +1,30 @@
+<section>
+    <div>
+        <div class="panel">
+            <div class="page-small_header">
+                <img src="/assets/images/logo-blue.png" alt="EMB Phones Login">
+            </div>
+            <form [formGroup]="type" (ngSubmit)="login()">
+                <div class="form-group" [ngClass]="{'error': pwdError}">
+                    <input type="text" class="form-control" formControlName="email" aria-describedby="emailHelp"
+                        placeholder="Email">
+                    <label [ngClass]="{'show': type.value.email.length > 0}">Email</label>
+                </div>
+                <div class="form-group" [ngClass]="{'error': pwdError}">
+                    <input type="{{togglePwd ? 'password' : 'text'}}" class="form-control" formControlName="password" placeholder="Password">
+                    <label [ngClass]="{'show': type.value.password.length > 0}">Password</label>
+                </div>
+                <div class="form-group d-flex mb-0" style="height: 50px">
+                    <a class="forgot-pwd" routerLink="/auth/forgot-password" routerLinkActive="active">Forgot Password?</a>
+                </div>
+                <div class="login-area">
+                    <button type="submit" class="btn btn-success auth-btn" [disabled]="!type.valid">Login</button>
+                </div>
+            </form>
+        </div>
+        <div class="err-msg" [ngClass]="{'error': pwdError}">
+            Sorry, this password doesn't match this email address.<br/>
+            Please try again or click "Forgot password" to reset your password.
+        </div>
+    </div>
+</section>
