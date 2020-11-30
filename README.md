@@ -1,3 +1,5 @@
+This project is admin panel for managing posts based on Angular 8.
+
 # PssPortal
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
